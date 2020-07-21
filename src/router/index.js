@@ -7,8 +7,8 @@ const originPush = VueRouter.prototype.push
 const originReplace = VueRouter.prototype.replace
 VueRouter.prototype.push = function (location, onResolved, onRejected) {
   if (onRejected === undefined && onResolved === undefined) {
-     // originReplace.call目的是让VueRouter实例化对象去调用，如果不加那就是window在调用
-    return originPush.call(this,location).catch(()=>{})
+    // originReplace.call目的是让VueRouter实例化对象去调用，如果不加那就是window在调用
+    return originPush.call(this, location).catch(() => {})
   } else {
     return originPush.call(this, location, onResolved, onRejected)
   }
@@ -22,5 +22,12 @@ VueRouter.prototype.replace = function (location, onResolved, onRejected) {
   }
 }
 export default new VueRouter({
-  routes
+  routes,
+  //鼠标滚动行为  解决跳转到页面底部的bug
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })

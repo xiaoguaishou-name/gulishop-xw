@@ -73,13 +73,24 @@ export default {
       if(query){
         location.query = query
       }
-      this.$router.push(location)
+      if(this.$route.path !== '/home'){
+        this.$router.replace(location)
+      }else{
+        this.$router.push(location)
+      }
+    },
+    clearKeyword(){
+      this.keyword = ''
     }
   },
   data(){
     return{
       keyword:''
     }
+  },
+  // 自定义事件
+  mounted(){
+    this.$bus.$on('clearKeyword',this.clearKeyword)
   }
 };
 </script>

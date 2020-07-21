@@ -13,3 +13,12 @@ export const reqCategoryList = () => Ajax({
 import mockAjax from '@/ajax/mockAjax'
 export const reqBannerList = () => mockAjax.get('/banner')
 export const reqFloorList = () => mockAjax.get('/floor')
+
+// 请求search商品搜索列表数据  post  /api/list  data(初始空的对象，无搜索，返回所有数据)
+export const reqGoodsList = (searchParams) => Ajax.post('/list', searchParams)
+
+//请求商品详情页数据
+export const reqGoodsDetailInfo = (skuId) => Ajax.get(`/item/${skuId}`)
+
+//请求添加购物车
+export const reqAddOrUpdateShopCart = (skuId, skuNum) => Ajax.post(`/cart/addToCart/${skuId}/${skuNum}`)

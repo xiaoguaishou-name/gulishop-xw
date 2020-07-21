@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import home from '@/store/home'
+import search from '@/store/search'
+import detail from '@/store/detail'
+import shopcart from '@/store/shopcart'
 Vue.use(Vuex)
 const state = {}
 const mutations = {}
@@ -13,6 +16,9 @@ export default new Vuex.Store({
   actions,
   getters,
   modules: {
-    home
+    home,
+    search,
+    detail,
+    shopcart
   }
 })

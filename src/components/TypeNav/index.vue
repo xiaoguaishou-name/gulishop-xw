@@ -28,7 +28,7 @@
                       <dt>
                         <a
                           href="javascript:;"
-                          :data-category1Id="c2.categoryId"
+                          :data-category2Id="c2.categoryId"
                           :data-categoryName="c2.categoryName"
                         >{{c2.categoryName}}</a>
                       </dt>
@@ -36,7 +36,7 @@
                         <em v-for="(c3,index) in c2.categoryChild" :key="c3.categoryId">
                           <a
                             href="javascript:;"
-                            :data-category1Id="c3.categoryId"
+                            :data-category3Id="c3.categoryId"
                             :data-categoryName="c3.categoryName"
                           >{{c3.categoryName}}</a>
                         </em>
@@ -130,11 +130,15 @@ export default {
         location.query = query;
         //点击三级分类的时候，我们也不能光关注query参数，也要去看看之前有没有params参数
         //如果有，需要把之前的params参数也带上
-        let {params} = this.$route
-        if(params){
-          location.params = params
+        let { params } = this.$route;
+        if (params) {
+          location.params = params;
         }
-        this.$router.push(location);
+        if (this.$route.path !== "/home") {
+          this.$router.replace(location);
+        } else {
+          this.$router.push(location);
+        }
       }
     }
   },
