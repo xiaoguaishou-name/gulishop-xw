@@ -17,6 +17,14 @@ service.interceptors.request.use(config => {
   if (userTempId) {
     config.headers.userTempId = userTempId
   }
+
+
+  //添加用户登录后的token信息，让每个ajax请求都带着这个token
+  let token = store.state.user.userInfo.token
+  if (token) {
+    config.headers.token = token
+  }
+
   //config是发送请求的配置对象，必须处理完返回这个配置对象
   //开启我们的进度条
   return config

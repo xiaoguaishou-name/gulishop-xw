@@ -5,7 +5,16 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+        
+          <!-- 判断用户是否为登陆状态 实则显示下方-->
+          <p v-if="userInfo.name">
+            <!-- <span>请</span> -->
+            <!-- <a href="###">登录</a> -->
+            <!-- <a href="###" class="register">免费注册</a> -->
+            <a href="javascript:;">{{userInfo.name}}</a>
+            <a href="javascript:;" class="register" @click="logout">退出</a>
+          </p>
+          <p v-else>
             <span>请</span>
             <!-- <a href="###">登录</a> -->
             <!-- <a href="###" class="register">免费注册</a> -->
@@ -45,6 +54,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "Header",
   methods:{
@@ -81,6 +91,15 @@ export default {
     },
     clearKeyword(){
       this.keyword = ''
+    },
+    async logout(){
+      try {
+        await this.$store.dispatch('userLogOut')
+        alert('退出成功,自动跳转到首页')
+        this.$router.push('/home')
+      } catch (error) {
+        alert(error.message)
+      }  
     }
   },
   data(){
@@ -91,6 +110,12 @@ export default {
   // 自定义事件
   mounted(){
     this.$bus.$on('clearKeyword',this.clearKeyword)
+  },
+  computed:{
+    //从用户的state中获取用户信息
+    ...mapState({
+      userInfo:state => state.user.userInfo
+    })
   }
 };
 </script>

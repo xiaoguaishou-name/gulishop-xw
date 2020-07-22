@@ -1,7 +1,8 @@
 import {
   reqAddOrUpdateShopCart,
   reqShopCartList,
-  reqUpdateIsChecked
+  reqUpdateIsChecked,
+  reqDeleteCart
 } from '@/api'
 const state = {
   shopCartList: []
@@ -51,6 +52,23 @@ const actions = {
     state.shopCartList.forEach(item => {
       if (item.isChecked === isChecked) return
       let promise = dispatch('updateIsChecked', {skuId:item.skuId,isChecked:isChecked})
+      promises.push(promise)
+    })
+    return Promise.all(promises)
+  },
+  async deleteShopCart({ commit }, skuId) {
+    const result = await reqDeleteCart(skuId)
+    if (result.code === 200) {
+      return '删除成功'
+    } else {
+      return Promise.reject(new Error('删除失败'))
+    }
+  },
+  deleteChecked({ commit, dispatch, state }) {
+    let promises = []
+    state.shopCartList.forEach(item => {
+      if (!item.isChecked) return
+      let promise = dispatch('deleteShopCart', item.skuId)
       promises.push(promise)
     })
     return Promise.all(promises)

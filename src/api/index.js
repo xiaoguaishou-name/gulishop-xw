@@ -28,3 +28,17 @@ export const reqShopCartList = () => Ajax.get('/cart/cartList')
 
 //请求修改购物车选中状态
 export const reqUpdateIsChecked = (skuID,isChecked) => Ajax.get(`/cart/checkCart/${skuID}/${isChecked}`)
+
+
+//请求删除购物车商品 
+export const reqDeleteCart = (skuId) => Ajax.delete(`/cart/deleteCart/${skuId}`)
+
+//请求注册   /api/user/passport/register   post
+export const reqRegister = (userInfo) => Ajax.post('/user/passport/register', userInfo)
+
+
+//请求登录
+export const reqLogin = (userInfo) => Ajax.post('/user/passport/login', userInfo)
+
+//退出登录    /api/user/passport/logout   get
+export const reqLogOut = () => Ajax.get('/user/passport/logout')
