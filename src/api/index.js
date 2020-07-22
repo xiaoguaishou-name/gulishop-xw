@@ -22,3 +22,9 @@ export const reqGoodsDetailInfo = (skuId) => Ajax.get(`/item/${skuId}`)
 
 //请求添加购物车
 export const reqAddOrUpdateShopCart = (skuId, skuNum) => Ajax.post(`/cart/addToCart/${skuId}/${skuNum}`)
+
+//获取购物车列表数据
+export const reqShopCartList = () => Ajax.get('/cart/cartList')
+
+//请求修改购物车选中状态
+export const reqUpdateIsChecked = (skuID,isChecked) => Ajax.get(`/cart/checkCart/${skuID}/${isChecked}`)

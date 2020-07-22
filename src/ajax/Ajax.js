@@ -1,6 +1,7 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import store from '@/store'
 const service = axios.create({
   baseURL: '/api',//基础路径
   timeout: 20000,//超时限制
@@ -11,6 +12,11 @@ const service = axios.create({
 //请求拦截器内部一般不会处理错误的信息
 service.interceptors.request.use(config => {
   NProgress.start();
+  //在请求头当中添加用户临时id，让每个ajax请求都带着这个userTempId
+  let userTempId = store.state.user.userTempId
+  if (userTempId) {
+    config.headers.userTempId = userTempId
+  }
   //config是发送请求的配置对象，必须处理完返回这个配置对象
   //开启我们的进度条
   return config
