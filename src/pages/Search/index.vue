@@ -60,7 +60,7 @@
                   <div class="p-img">
                     <!-- <a href="item.html" target="_blank"> -->
                     <router-link :to="`/detail/${goods.id}`">
-                      <img :src="goods.defaultImg" />
+                      <img v-lazy="goods.defaultImg" />
                     </router-link>
                     <!-- </a> -->
                   </div>

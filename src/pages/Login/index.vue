@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import store from '@/store'
   export default {
     name: 'Login',
     data(){
@@ -81,8 +82,14 @@
           let userInfo = {mobile,password}
           try {
             await this.$store.dispatch('userLogin',userInfo)
-            alert('登陆成功，跳转到首页')
-            this.$router.push('/home')
+            // alert('登陆成功，跳转到首页')
+            // this.$router.push('/home')
+            let redirectPath = this.$route.query.redirect
+            if(redirectPath){
+              this.$router.push(redirectPath)
+            }else{
+              this.$router.push('/home')
+            }
           } catch (error) {
             alert(error.message)
           }  

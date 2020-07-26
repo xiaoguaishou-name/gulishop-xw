@@ -54,3 +54,6 @@ export const reqOrderInfo = (orderId) => Ajax.get(`/payment/weixin/createNative/
 
 //请求查看订单的支付信息
 export const reqPayStatus = (orderId) => Ajax.get(`/payment/weixin/queryPayStatus/${orderId}`)
+
+//请求获取我的订单列表信息
+export const reqMyOrder = (page,limit) => Ajax.get(`/order/auth/${page}/${limit}`)
